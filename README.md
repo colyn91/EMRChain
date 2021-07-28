@@ -34,7 +34,7 @@ Gas limit
 ### Steps
 
 1) Open: http://remix.ethereum.org
-2) File explorer: APKList.sol
+2) File explorer: BCList.sol
 3) Choose: Environment(Solidity), Compiler (0.4.23+commit.124ca40d), EVM Version (0.4.23+commit.124ca40d)
 4) Compile
 5) Deploy 
