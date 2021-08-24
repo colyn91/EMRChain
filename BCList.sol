@@ -1,8 +1,8 @@
 pragma solidity ^0.4.23;
 
-contract BCList {
+contract EMRList {
      
-	address public CA;
+	address public doctor;
 	struct BCert{
 		uint256 br;
 		uint256 bs;
@@ -15,12 +15,12 @@ contract BCList {
 	event _Check(address indexed requester);
 	event _Retrieve(address indexed requester);
     event _Revoke(address indexed requester);
-    function BCList() public {
-		CA = msg.sender;
+    function EMRList() public {
+		doctor = msg.sender;
     }
 	
 	function Upload(uint256 br, uint256 bs) public returns (bytes32){
-		require(msg.sender == CA);
+		require(msg.sender == doctor);
 		bytes32 index = keccak256(br,bs);
         bcMap[index].br = br;
 		bcMap[index].bs = bs;
@@ -44,7 +44,7 @@ contract BCList {
     }
 	
 	function Revoke(uint256 br, uint256 bs) public{
-		require(msg.sender == CA);		
+		require(msg.sender == doctor);		
         bytes32 index = keccak256(br,bs);
 		if(bcMap[index].br == br && bcMap[index].bs == bs)
 		{
