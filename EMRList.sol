@@ -3,12 +3,12 @@ pragma solidity ^0.4.23;
 contract EMRList {
      
 	address public doctor;
-	struct BCert{
+	struct bEMR{
 		uint256 br;
 		uint256 bs;
 	}
 	
-    mapping(bytes32 => BCert) internal bcMap;
+    mapping(bytes32 => bEMR) internal beMap;
  
  
 	event _Upload(address indexed requester);
@@ -22,15 +22,15 @@ contract EMRList {
 	function Upload(uint256 br, uint256 bs) public returns (bytes32){
 		require(msg.sender == doctor);
 		bytes32 index = keccak256(br,bs);
-        bcMap[index].br = br;
-		bcMap[index].bs = bs;
+        beMap[index].br = br;
+		beMap[index].bs = bs;
 		_Upload(msg.sender);
         return index;
     }	
 
     function Check(uint256 br, uint256 bs) public view returns (bool) {
 		bytes32 index = keccak256(br,bs);
-		if(bcMap[index].br == br  && bcMap[index].bs == bs)
+		if(beMap[index].br == br  && beMap[index].bs == bs)
 		{
 			return true;
 		}
@@ -40,15 +40,15 @@ contract EMRList {
 	
 	function Retrieve(bytes32 index) public view returns (uint256, uint256) {
 		_Retrieve(msg.sender);
-        return (bcMap[index].br, bcMap[index].bs);
+        return (beMap[index].br, beMap[index].bs);
     }
 	
 	function Revoke(uint256 br, uint256 bs) public{
 		require(msg.sender == doctor);		
         bytes32 index = keccak256(br,bs);
-		if(bcMap[index].br == br && bcMap[index].bs == bs)
+		if(beMap[index].br == br && beMap[index].bs == bs)
 		{
-			delete bcMap[index];
+			delete beMap[index];
 		}
 		_Revoke(msg.sender);
     }
