@@ -39,7 +39,7 @@ contract EMRList {
     }
 	
 	function Get(bytes32 index) public view returns (uint256, uint256) {
-		_Retrieve(msg.sender);
+		_Get(msg.sender);
         return (beMap[index].br, beMap[index].bs);
     }
 	
