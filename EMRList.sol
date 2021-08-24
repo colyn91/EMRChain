@@ -13,7 +13,7 @@ contract EMRList {
  
 	event _Upload(address indexed requester);
 	event _Check(address indexed requester);
-	event _Retrieve(address indexed requester);
+	event _Get(address indexed requester);
     event _Revoke(address indexed requester);
     function EMRList() public {
 		doctor = msg.sender;
@@ -38,7 +38,7 @@ contract EMRList {
         return false;
     }
 	
-	function Retrieve(bytes32 index) public view returns (uint256, uint256) {
+	function Get(bytes32 index) public view returns (uint256, uint256) {
 		_Retrieve(msg.sender);
         return (beMap[index].br, beMap[index].bs);
     }
